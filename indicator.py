@@ -29,13 +29,13 @@ class SSH_Dynamic_Tunel:
         self.host = host
         self.password = password
        
-        command = "ssh %s@%s -D %d" %(user, host, dport)
+        command = "ssh %s@%s -N -D %d" %(user, host, dport)
 
         self.expects = [
                 'authenticity', # TODO what's this?
                 'password:', # ask for password
                 '@@@@@@@@@@', # identify changed
-                'continue connecting (yes/no)?', # confirem
+                'continue connecting (yes/no)?', # confirm
                 'Write failed: Broken pipe', # proberly network error, retry
                 'SSH permission denied (publickey)', # password or private key error, stop
                 '$', # success, TODO complete more possibility
